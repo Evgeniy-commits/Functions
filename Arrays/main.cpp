@@ -2,9 +2,14 @@
 using namespace std;
 #define tab   "\t"
 
-void FillRand(int arr[], const int n);
+void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 100);
+void FillRand(double arr[], const int n, int minRand = 0, int maxRand = 100);
+
 void Print(int arr[], const int n);
+void Print(double arr[], const int n);
+
 void Sort(int arr[], const int n);
+void Sort(double arr[], const int n);
 
 void main()
 {
@@ -18,22 +23,40 @@ void main()
 	Print(arr, n);
 
 	const int SIZE = 8;
-	int brr[SIZE];
+	double brr[SIZE];
 	FillRand(brr, SIZE);
 	Print(brr, SIZE);
 	Sort(brr, SIZE);
 	Print(brr, SIZE);
 }
 
-void FillRand(int arr[], const int n)
+void FillRand(int arr[], const int n, int minRand, int maxRand)
 {
 	for (int i = 0; i < n; i++)
 	{
-		arr[i] = rand() % 100;
+		arr[i] = rand() % (maxRand - minRand) + minRand;
+	}
+}
+void FillRand(double arr[], const int n, int minRand, int maxRand)
+{
+	minRand *= 100;
+	maxRand *= 100;
+	for (int i = 0; i < n; i++)
+	{
+		arr[i] = rand() % (maxRand - minRand) + minRand;
+		arr[i] /= 100;
 	}
 }
 
 void Print(int arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		cout << arr[i] << tab;
+	}
+	cout << endl;
+}
+void Print(double arr[], const int n)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -48,5 +71,18 @@ void Sort(int arr[], const int n)
 		{
 			if (arr[j] < arr[i])
 				arr[j] ^= arr[i] ^= arr[j] ^= arr[i];
+		}
+}
+void Sort(double arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+		for (int j = i + 1; j < n; j++)
+		{
+			if (arr[j] < arr[i])
+			{
+				double buffer = arr[i];
+				arr[i] = arr[j];
+				arr[j] = buffer;
+			}
 		}
 }

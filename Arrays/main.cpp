@@ -37,7 +37,7 @@ int Sum(int arr[], const int n);
 double Sum(double arr[], const int n);
 float Sum(float arr[], const int n);
 
-int Avg(int arr[], const int n);
+double Avg(int arr[], const int n);
 double Avg(double arr[], const int n);
 float Avg(float arr[], const int n);
 
@@ -372,7 +372,7 @@ void ArrInt(char arr[], double arrInt[], const int n)
 {
 	for (int i = 0; i < n; i++)
 	{
-		arrInt[i] = (int)arr[i];
+		arrInt[i] = arr[i];
 	}
 }
 
@@ -404,9 +404,9 @@ float Sum(float arr[], const int n)
 	return Sum;
 }
 
-int Avg(int arr[], const int n)
+double Avg(int arr[], const int n)
 {
-	double Avg = Sum(arr, n) / n;
+	double Avg = (double)Sum(arr, n) / n;
 	return Avg;
 }
 double Avg(double arr[], const int n)

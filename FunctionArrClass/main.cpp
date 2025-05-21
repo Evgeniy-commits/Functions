@@ -48,6 +48,8 @@ void main()
 	cout << "Введите число сдвигов влево: "; cin >> number_of_shifts;
 	ShiftLeft(arr, n, number_of_shifts);
 	Print(arr, n);
+	Sort(arr, n);
+	Print(arr, n);
 	ShiftRight(arr, n, number_of_shifts);
 	Print(arr, n);
 
@@ -65,6 +67,8 @@ void main()
 	cout << "Максимальное значеие равно: " << MaxValueIn(brr, td) << "\n\n";
 	cout << "Введите число сдвигов: "; cin >> number_of_shifts;
 	ShiftLeft(brr, td, number_of_shifts);
+	Print(brr, td);
+	Sort(brr, td);
 	Print(brr, td);
 	ShiftRight(brr, td, number_of_shifts);
 	Print(brr, td);
@@ -220,17 +224,27 @@ void ShiftLeft(double arr[], const int n, int number_of_shifts)
 	}
 }
 
-void ShiftRight(int arr[], const int n, int number_of_shifts)
+void ShiftRight(int arr[], const int n, int const number_of_shifts)
 {
 	for (int i = 0; i < number_of_shifts; i++)
 	{
-		ShiftLeft(arr, n, n - number_of_shifts);
+		int buffer = arr[n - 1];
+		for (int i = n - 1; i > 0; i--)
+		{
+			arr[i] = arr[i - 1];
+		}
+		arr[0] = buffer;
 	}
 }
-void ShiftRight(double arr[], const int n, int number_of_shifts)
+void ShiftRight(double arr[], const int n, const int number_of_shifts)
 {
 	for (int i = 0; i < number_of_shifts; i++)
 	{
-		ShiftLeft(arr, n, n - number_of_shifts);
+		double buffer = arr[n - 1];
+		for (int i = n - 1; i > 0; i--)
+		{
+			arr[i] = arr[i - 1];
+		}
+		arr[0] = buffer;
 	}
 }

@@ -17,11 +17,24 @@ double Sum(double arr[], const int n);
 double Avg(int arr[], const int n);
 double Avg(double arr[], const int n);
 
+int MinValueIn(int arr[], const int n);
+double MinValueIn(double arr[], const int n);
+
+int MaxValueIn(int arr[], const int n);
+double MaxValueIn(double arr[], const int n);
+
+void ShiftLeft(int arr[], const int n, int number_of_shifts);
+void ShiftLeft(double arr[], const int n, int number_of_shifts);
+
+void ShiftRight(int arr[], const int n, int number_of_shifts);
+void ShiftRight(double arr[], const int n, int number_of_shifts);
+
 void main()
 {
 	setlocale(LC_ALL, "");
 	const int n = 5;
 	int arr[n];
+	int number_of_shifts;
 
 	FillRand(arr, n);
 	cout << "\t ИСХОДНЫЙ МАССИВ\n\n";
@@ -30,6 +43,13 @@ void main()
 	Print(arr, n);
 	cout << "Сумма элементов массива равна " << Sum(arr, n) << "\n\n";	
 	cout << "Среднее арифметическое элементов массива равно " << Avg(arr, n) << "\n\n";
+	cout << "Минимальное значеие равно: " << MinValueIn(arr, n) << "\n\n";
+	cout << "Максимальное значеие равно: " << MaxValueIn(arr, n) << "\n\n";
+	cout << "Введите число сдвигов влево: "; cin >> number_of_shifts;
+	ShiftLeft(arr, n, number_of_shifts);
+	Print(arr, n);
+	ShiftRight(arr, n, number_of_shifts);
+	Print(arr, n);
 
 	const int td = 8;
 	double brr[td];
@@ -41,6 +61,13 @@ void main()
 	Print(brr, td);
 	cout << "Сумма элементов массива равна " << Sum(brr, td) << "\n\n";
 	cout << "Среднее арифметическое элементов массива равно " << Avg(brr, td) << "\n\n";
+	cout << "Минимальное значеие равно: " << MinValueIn(brr, td) << "\n\n";
+	cout << "Максимальное значеие равно: " << MaxValueIn(brr, td) << "\n\n";
+	cout << "Введите число сдвигов: "; cin >> number_of_shifts;
+	ShiftLeft(brr, td, number_of_shifts);
+	Print(brr, td);
+	ShiftRight(brr, td, number_of_shifts);
+	Print(brr, td);
 }
 
 void FillRand(int arr[], const int n, int minRand, int maxRand)
@@ -128,4 +155,82 @@ double Avg(int arr[], const int n)
 double Avg(double arr[], const int n)
 {
 	return Sum(arr, n) / n;
+}
+
+int MinValueIn(int arr[], const int n)
+{
+	int min = arr[0];
+	for (int i = 0; i < n; i++)
+	{
+		min > arr[i] ? min = arr[i] : 0;
+	}
+	return min;
+}
+double MinValueIn(double arr[], const int n)
+{
+	double min = arr[0];
+	for (int i = 0; i < n; i++)
+	{
+		min > arr[i] ? min = arr[i] : 0;
+	}
+	return min;
+}
+
+int MaxValueIn(int arr[], const int n)
+{
+	int max = arr[0];
+	for (int i = 0; i < n; i++)
+	{
+		max < arr[i] ? max = arr[i] : 0;
+	}
+	return max;
+}
+double MaxValueIn(double arr[], const int n)
+{
+	double max = arr[0];
+	for (int i = 0; i < n; i++)
+	{
+		max < arr[i] ? max = arr[i] : 0;
+	}
+	return max;
+}
+
+void ShiftLeft(int arr[], const int n, int number_of_shifts)
+{ 
+	for (int i = 0; i < number_of_shifts; i++)
+	{
+		int buffer = arr[0];
+		for (int i = 0; i < n; i++)
+		{
+			arr[i] = arr[i + 1];
+		}
+		arr[n - 1] = buffer;
+	}
+}
+void ShiftLeft(double arr[], const int n, int number_of_shifts)
+{
+	for (int i = 0; i < number_of_shifts; i++)
+	{
+		double buffer = arr[0];
+		for (int i = 0; i < n; i++)
+		{
+			arr[i] = arr[i + 1];
+		}
+		arr[n - 1] = buffer;
+	}
+}
+
+void ShiftRight(int arr[], const int n, int number_of_shifts)
+{
+	for (int i = 0; i < number_of_shifts; i++)
+	{
+		ShiftLeft(arr, n, n - number_of_shifts);
+	}
+}
+void ShiftRight(double arr[], const int n, int number_of_shifts)
+{
+	for (int i = 0; i < number_of_shifts; i++)
+	{
+		ShiftLeft(arr, n, n - number_of_shifts);
+	}
 }
